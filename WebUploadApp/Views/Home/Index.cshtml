@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Angular File upload";
+}
+
+
+
+<div ng-controller="blogcontroller">
+    <div>
+        <h4>Angular js Drag and Drop File Upload with progress bar,abort option</h4>
+    </div>
+    <br/>
+    <div>
+        <div class="form-inline">
+            <label>Tracking id :</label>
+            <input type="text" class="form-control" ng-model="filedata.trackingid" />
+        </div>
+        <br />
+        <div class="form-inline">
+            <label>Description :</label>
+            <input type="text" class="form-control" ng-model="filedata.description" />
+        </div>
+        <div style="margin-left:25px;" class="row">
+            <fileupload-form class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                             asyncurl="~/api/Blog"
+                             method="post"
+                             input-data="filedata"
+                             filedrop-enable="true"
+                             fileselect-callback="uploadfiles(files)"
+                             success-callback="success(data,status,headers,config)"
+                             error-callback="error(data,status,headers,config)"></fileupload-form>
+
+            <fileupload-form class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                             asyncurl="~/api/Blog"
+                             method="post"
+                             input-data="filedata"
+                             filedrop-enable="false"
+                             fileselect-callback="uploadfiles(files)"
+                             success-callback="success(data,status,headers,config)"
+                             error-callback="error(data,status,headers,config)"></fileupload-form>
+
+        </div>
+    </div>
+
+</div>

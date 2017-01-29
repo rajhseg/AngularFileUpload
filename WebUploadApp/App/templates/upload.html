@@ -1,0 +1,80 @@
+﻿<div class="row"> 
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="form-inline" style="padding:20px">
+            <div class="text-info" style="padding-top:6px"><label>Files :</label></div>
+            <input type="text" ng-model="uploadedFilesString" class="form-control" />
+           <button ng-click="browseFiles()" style="margin-top:5px;margin-bottom:5px" ng-disabled="uploadinProgress" class="form-control btn-info btn btn-sm">Browse</button>
+           <button ng-click="uploading()" class="form-control btn btn-sm btn-success">Upload</button>
+        </div>
+        <div class="form-group row">
+            <input type="file" style="display:none" ng-file-select="uploadedFiles($files)" class="form-control" 
+                   ng-model="user.file" multiple />
+        </div>
+        <div class="row">
+            <div ng-show="dropcontainerEnable" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <dropfile style="padding:5px;" class="row" browse="dropfiles(files)"></dropfile>
+            </div>
+            <div class="panel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div ng-show="upfile.isshow" class="row container" 
+                     style="padding: 10px;margin-bottom:4px;border: 1px solid rgba(128, 128, 128, 0.4);border-radius: 5px;" 
+                     ng-repeat="upfile in progressFiles">
+                  
+                    <div style="position:relative" >
+                        <div ng-show="!upfile.isprogress" style="position: absolute;border-radius: 12px;border: 2px solid #e5e5e5;width: 19px;height: 19px;right: -5px;top:-5px;">
+                            <span style="font-weight: 600;font-size: 21px;color: rgba(153, 153, 153, 0.5);position: absolute;top: -7px;left: 2px;cursor: pointer;" ng-click="close(upfile.index)">&times;</span>
+                        </div>
+                    </div>  
+                  
+                   <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                        <span style="color: {{upfile.filecolor}};font-size: 40px;position: absolute;" class="glyphicon glyphicon-file"></span>
+                        <span style="font-size: 12px;font-weight: 600;color: white;position: absolute;margin-top:25px;border-top-left-radius: 5px;width: 35px;text-align:center">{{upfile.extn}}</span>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-4">
+                        <strong style="padding:5px;">{{upfile.filename|ellipses:18}}</strong>
+                        <div style="padding:5px;font-size:12px;">Size : {{upfile.size}}</div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
+                        <div class="row container">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <!--<div style="border:1px solid gray;border-radius:5px;margin-top:10px;background-color:lightgray" progress-width="upfile.progress">
+                                    <div ng-show="!upfile.isabort && !upfile.iserror" style="border:1px solid green;border-radius:5px;background-color:lawngreen;width:40px;"></div>
+                                    <div ng-show="upfile.isabort || upfile.iserror" style="border:1px solid red;border-radius:5px;background-color:lawngreen;width:40px;"></div>
+                                </div>-->
+                                <div class="progress" style="height:5px;margin-top:18px;margin-bottom:0px;">
+                                    <div ng-show="!upfile.isabort && !upfile.iserror" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{upfile.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{upfile.progress}}%">
+                                        <label  style="padding-top:2px;font-weight:600">{{upfile.progress}}%</label>
+                                    </div>
+                                    <div ng-show="upfile.isabort" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{upfile.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{upfile.progress}}%">
+                                        <label style="padding-top:2px;font-weight:600">{{upfile.progress}}%</label>
+                                    </div>
+
+                                    <div ng-show="upfile.iserror" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{upfile.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{upfile.progress}}%">
+                                        <label style="padding-top:2px;font-weight:600">{{upfile.progress}}%</label>
+                                    </div>
+                                </div>      
+                                <div style="text-align:right">
+                                    <span>{{upfile.progress}}%</span>  
+                                </div>                                                        
+                            </div>                           
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                        <div>
+                            <button ng-show="upfile.isprogress" style="margin-top:12px;margin-left:-30px;"  ng-click="abort(upfile.index)" class="btn btn-danger btn-xs">Abort</button>                           
+                            <div ng-show="upfile.iserror" style="padding-top:10px">
+                                <span style="color:red;font-size:12px;font-weight:600">Error while uploading</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+   
+</div>
