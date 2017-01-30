@@ -1,4 +1,7 @@
-﻿
+﻿/**
+ * Created by Rajesh G on 28-01-2017.
+ */
+
 var rgapp = angular.module('rgapp', ['angularFileUpload']);
 
 rgapp.controller('blogcontroller', ['$scope', '$upload', function ($scope, $upload) {
